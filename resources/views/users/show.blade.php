@@ -21,6 +21,13 @@
                 <a href="{{ route('roles.show', $user->role) }}" class="text-amber-700 hover:underline">{{ $user->role->libRole }}</a>
             @endif
         </p>
+        <p><span class="text-slate-500">Entreprise :</span>
+            @if ($user->entreprise)
+                <a href="{{ route('entreprises.show', $user->entreprise) }}" class="text-amber-700 hover:underline">{{ $user->entreprise->nomEntreprise }}</a>
+            @else
+                —
+            @endif
+        </p>
         <p class="sm:col-span-2"><span class="text-slate-500">Clients :</span>
             @forelse ($user->clients as $client)
                 <a href="{{ route('clients.show', $client) }}" class="text-amber-700 hover:underline">{{ $client->nomComplet() }}</a>{{ $loop->last ? '' : ', ' }}

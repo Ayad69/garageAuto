@@ -13,15 +13,15 @@
             <thead class="bg-slate-50 text-left text-slate-600">
                 <tr>
                     <th class="px-4 py-3 font-medium">Nom</th>
-                    <th class="px-4 py-3 font-medium">Email</th>
+                    <th class="px-4 py-3 font-medium">Login</th>
                     <th class="px-4 py-3 text-right font-medium">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
                 @forelse ($mecaniciens as $mecanicien)
                     <tr>
-                        <td class="px-4 py-3">{{ $mecanicien->nomComplet() }}</td>
-                        <td class="px-4 py-3">{{ $mecanicien->user?->email }}</td>
+                        <td class="px-4 py-3">{{ $mecanicien->nomMecanicien }} {{ $mecanicien->prenomMecanicien }}</td>
+                        <td class="px-4 py-3">{{ $mecanicien->login }}</td>
                         <td class="px-4 py-3 text-right space-x-3">
                             <a href="{{ route('mecaniciens.show', $mecanicien) }}" class="font-medium text-slate-600 hover:text-slate-900">Voir</a>
                             <a href="{{ route('mecaniciens.edit', $mecanicien) }}" class="font-medium text-amber-600 hover:text-amber-800">Modifier</a>

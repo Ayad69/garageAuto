@@ -30,6 +30,7 @@
                                 ['Types de réparations', 'type-reparations.index', 'type-reparations.*'],
                                 ['Types de diagnostics', 'type-diagnostics.index', 'type-diagnostics.*'],
                                 ['Rôles', 'roles.index', 'roles.*'],
+                                ['Entreprises', 'entreprises.index', 'entreprises.*'],
                                 ['Utilisateurs', 'users.index', 'users.*'],
                             ],
                         ];

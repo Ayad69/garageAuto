@@ -19,13 +19,14 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role_id' => ['required', 'exists:roles,id'],
+            'entreprise_id' => ['required', 'exists:entreprises,id'],
         ]);
 
         $user = User::create($data);
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user->load('role'),
+            'user' => $user->load(['role', 'entreprise']),
             'token' => $token,
             'token_type' => 'Bearer',
         ], 201);
@@ -49,7 +50,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user->load('role'),
+            'user' => $user->load(['role', 'entreprise']),
             'token' => $token,
             'token_type' => 'Bearer',
         ]);

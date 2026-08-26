@@ -45,7 +45,13 @@ class MecanicienController extends Controller
 
     public function update(Request $request, Mecanicien $mecanicien): RedirectResponse
     {
-        $mecanicien->update($this->validated($request, $mecanicien));
+        $data = $this->validated($request, $mecanicien);
+
+        if (blank($data['password'] ?? null)) {
+            unset($data['password']);
+        }
+
+        $mecanicien->update($data);
 
         return redirect()->route('mecaniciens.index')->with('success', 'Mécanicien mis à jour.');
     }
@@ -90,6 +96,10 @@ class MecanicienController extends Controller
     {
         return $request->validate([
             'user_id' => ['required', 'exists:users,id', Rule::unique('mecaniciens', 'user_id')->ignore($mecanicien->id)],
+            'nomMecanicien' => ['required', 'string', 'max:255'],
+            'prenomMecanicien' => ['required', 'string', 'max:255'],
+            'login' => ['required', 'string', 'max:255', Rule::unique('mecaniciens', 'login')->ignore($mecanicien->id)],
+            'password' => [$mecanicien->exists ? 'nullable' : 'required', 'string', 'min:8'],
         ]);
     }
 }

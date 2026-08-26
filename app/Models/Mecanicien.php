@@ -3,13 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-#[Fillable(['user_id'])]
+#[Fillable([
+    'user_id',
+    'nomMecanicien',
+    'prenomMecanicien',
+    'login',
+    'password',
+])]
+#[Hidden(['password'])]
 class Mecanicien extends Model
 {
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -31,6 +46,6 @@ class Mecanicien extends Model
 
     public function nomComplet(): string
     {
-        return $this->user?->nomComplet() ?? '';
+        return trim($this->nomMecanicien.' '.$this->prenomMecanicien);
     }
 }

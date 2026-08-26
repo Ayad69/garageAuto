@@ -15,6 +15,7 @@
                     <th class="px-4 py-3 font-medium">Nom</th>
                     <th class="px-4 py-3 font-medium">Email</th>
                     <th class="px-4 py-3 font-medium">Rôle</th>
+                    <th class="px-4 py-3 font-medium">Entreprise</th>
                     <th class="px-4 py-3 text-right font-medium">Actions</th>
                 </tr>
             </thead>
@@ -24,6 +25,7 @@
                         <td class="px-4 py-3">{{ $user->name }} {{ $user->surname }}</td>
                         <td class="px-4 py-3">{{ $user->email }}</td>
                         <td class="px-4 py-3">{{ $user->role?->libRole }}</td>
+                        <td class="px-4 py-3">{{ $user->entreprise?->nomEntreprise }}</td>
                         <td class="px-4 py-3 text-right space-x-3">
                             <a href="{{ route('users.show', $user) }}" class="font-medium text-slate-600 hover:text-slate-900">Voir</a>
                             <a href="{{ route('users.edit', $user) }}" class="font-medium text-amber-600 hover:text-amber-800">Modifier</a>
@@ -32,7 +34,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="px-4 py-8 text-center text-slate-500">Aucun utilisateur.</td>
+                        <td colspan="5" class="px-4 py-8 text-center text-slate-500">Aucun utilisateur.</td>
                     </tr>
                 @endforelse
             </tbody>

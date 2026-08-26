@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('mecaniciens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained();
+            $table->string('nomMecanicien');
+            $table->string('prenomMecanicien');
+            $table->string('login')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }

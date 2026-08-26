@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -14,7 +15,7 @@ class UserController extends Controller
 {
     public function index(): View
     {
-        $users = User::with('role')->latest()->paginate(10);
+        $users = User::with(['role', 'entreprise'])->latest()->paginate(10);
 
         return view('users.index', compact('users'));
     }
@@ -33,7 +34,7 @@ class UserController extends Controller
 
     public function show(User $user): View
     {
-        $user->load(['role', 'clients', 'mecanicien']);
+        $user->load(['role', 'entreprise', 'clients', 'mecanicien']);
 
         return view('users.show', compact('user'));
     }
@@ -75,6 +76,7 @@ class UserController extends Controller
     {
         return array_merge($data, [
             'roles' => Role::orderBy('libRole')->get(),
+            'entreprises' => Entreprise::orderBy('nomEntreprise')->get(),
         ]);
     }
 
@@ -89,6 +91,7 @@ class UserController extends Controller
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user?->id)],
             'password' => [$user ? 'nullable' : 'required', 'string', 'min:8'],
             'role_id' => ['required', 'exists:roles,id'],
+            'entreprise_id' => ['required', 'exists:entreprises,id'],
         ]);
     }
 }

@@ -13,6 +13,7 @@
             ['Mécaniciens', $counts['mecaniciens'], 'mecaniciens.index'],
             ['Catégories', $counts['categories'], 'categories.index'],
             ['Marques', $counts['marques'], 'marques.index'],
+            ['Entreprises', $counts['entreprises'], 'entreprises.index'],
         ] as [$label, $count, $route])
             <a href="{{ route($route) }}" class="rounded-xl bg-white p-5 shadow-sm transition hover:shadow-md">
                 <p class="text-sm text-slate-500">{{ $label }}</p>

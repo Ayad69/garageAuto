@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiagnosticController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\MecanicienController;
 use App\Http\Controllers\PieceController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\VehiculeController;
 use App\Models\Categorie;
 use App\Models\Client;
 use App\Models\Diagnostic;
+use App\Models\Entreprise;
 use App\Models\Marque;
 use App\Models\Mecanicien;
 use App\Models\Piece;
@@ -34,6 +36,7 @@ Route::get('/', function () {
             'mecaniciens' => Mecanicien::count(),
             'categories' => Categorie::count(),
             'marques' => Marque::count(),
+            'entreprises' => Entreprise::count(),
         ],
     ]);
 })->name('home');
@@ -48,6 +51,7 @@ Route::resource('categories', CategorieController::class)
     ->parameters(['categories' => 'categorie']);
 Route::resource('marques', MarqueController::class);
 Route::resource('roles', RoleController::class);
+Route::resource('entreprises', EntrepriseController::class);
 Route::resource('users', UserController::class);
 
 Route::resource('type-vehicules', TypeVehiculeController::class)
